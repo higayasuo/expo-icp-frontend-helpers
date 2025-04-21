@@ -8,13 +8,14 @@ Helper functions for integrating Expo and ICP frontend. Provides deep linking, i
 npm install expo-icp-frontend-helpers
 ```
 
-## Peer Dependencies
+## Dependencies
 
-This package requires the following peer dependency:
+This package requires the following dependencies:
 
-- `canister-manager` (>=0.1.7)
+- `canister-manager` (>=0.1.7) as peer dependency
+- `@higayasuo/u8a-utils` (>=0.1.0) as dependency
 
-Make sure it is installed in your project:
+Make sure they are installed in your project:
 
 ```bash
 npm install canister-manager@^0.1.7
@@ -122,42 +123,13 @@ Builds the appropriate deep link URL based on the provided configuration:
 
 ### Iframe Detection
 
-#### `isInIframe`
+#### `determineIframe`
 
 ```typescript
-import { isInIframe } from 'expo-icp-frontend-helpers';
+import { determineIframe } from 'expo-icp-frontend-helpers';
 
 // Example usage
-const isIframe = isInIframe();
+const isIframe = determineIframe();
 ```
 
 Returns `true` if the code is running inside an iframe, `false` otherwise.
-
-### URL Validation
-
-#### `isValidUrl`
-
-```typescript
-import { isValidUrl } from 'expo-icp-frontend-helpers';
-
-// Example usage
-const isValid = isValidUrl('https://example.com');
-```
-
-Returns `true` if the provided string is a valid URL, `false` otherwise.
-
-### Environment Detection
-
-#### `getEnvironment`
-
-```typescript
-import { getEnvironment } from 'expo-icp-frontend-helpers';
-
-// Example usage
-const env = getEnvironment();
-```
-
-Returns the current environment:
-- `'development'`: When running in development mode
-- `'production'`: When running in production mode
-- `'test'`: When running in test mode
