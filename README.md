@@ -53,7 +53,7 @@ Throws an error with a clear message if:
 
 Example error handling:
 ```typescript
-import { AuthenticationExpiredError, ERROR_NAMES } from 'expo-icp-frontend-helpers';
+import { isAuthenticationExpiredError, isSessionKeyMismatchError } from 'expo-icp-frontend-helpers';
 
 // Example of handling authentication expiration
 async function handleIdentity() {
@@ -62,7 +62,7 @@ async function handleIdentity() {
     // Use the identity for authenticated operations
     return identity;
   } catch (error) {
-    if (error.name === ERROR_NAMES.AUTHENTICATION_EXPIRED) {
+    if (isAuthenticationExpiredError(error)) {
       // Clear any stored authentication data
       await clearStoredAuthData();
 
@@ -74,7 +74,7 @@ async function handleIdentity() {
 
       // Optionally, you can return null or throw a different error
       return null;
-    } else if (error.name === ERROR_NAMES.SESSION_KEY_MISMATCH) {
+    } else if (isSessionKeyMismatchError(error)) {
       // Handle session key mismatch
       // e.g., clear session and redirect to login
     } else {

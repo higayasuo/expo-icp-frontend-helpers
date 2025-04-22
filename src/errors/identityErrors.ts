@@ -36,3 +36,17 @@ export class SessionKeyMismatchError extends IdentityError {
     this.name = ERROR_NAMES.SESSION_KEY_MISMATCH;
   }
 }
+
+/**
+ * Type guard for AuthenticationExpiredError
+ */
+export function isAuthenticationExpiredError(error: unknown): error is AuthenticationExpiredError {
+  return error instanceof Error && error.name === ERROR_NAMES.AUTHENTICATION_EXPIRED;
+}
+
+/**
+ * Type guard for SessionKeyMismatchError
+ */
+export function isSessionKeyMismatchError(error: unknown): error is SessionKeyMismatchError {
+  return error instanceof Error && error.name === ERROR_NAMES.SESSION_KEY_MISMATCH;
+}

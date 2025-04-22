@@ -5,6 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.4] - 2025-04-22
+
+### Added
+- Identity Management
+  - Added type guard functions for error handling:
+    - `isAuthenticationExpiredError`
+    - `isSessionKeyMismatchError`
+  - Enhanced error handling documentation with type-safe examples
+
+### Changed
+- Identity Management
+  - Improved error handling with type-safe type guards
+  - Updated error handling examples in README.md to use type guard functions
+- Tests
+  - Added comprehensive tests for type guard functions
+  - Improved test coverage for error handling
+
 ## [0.1.3] - 2025-04-22
 
 ### Added
