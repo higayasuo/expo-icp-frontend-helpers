@@ -63,6 +63,6 @@ describe('buildIdentity', () => {
         appKey,
         delegationChain,
       }),
-    ).rejects.toThrow('Delegation chain has expired. Please re-authenticate to get a new delegation.');
+    ).rejects.toThrow('Authentication has expired. Please log in again.');
   });
 });
