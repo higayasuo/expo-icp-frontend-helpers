@@ -48,8 +48,63 @@ The function performs the following security checks:
 - Verifies the app key matches the public key in the delegation chain
 
 Throws an error with a clear message if:
-- The delegation chain has expired
-- The app key does not match the delegation chain's public key
+- Authentication has expired (please log in again) - `AuthenticationExpiredError`
+- The app key does not match the delegation chain's public key - `SessionKeyMismatchError`
+
+Example error handling:
+```typescript
+import { AuthenticationExpiredError, ERROR_NAMES } from 'expo-icp-frontend-helpers';
+
+// Example of handling authentication expiration
+async function handleIdentity() {
+  try {
+    const identity = await buildIdentity({ appKey, delegationChain });
+    // Use the identity for authenticated operations
+    return identity;
+  } catch (error) {
+    if (error.name === ERROR_NAMES.AUTHENTICATION_EXPIRED) {
+      // Clear any stored authentication data
+      await clearStoredAuthData();
+
+      // Show a user-friendly message
+      showToast('Your session has expired. Please log in again.');
+
+      // Redirect to login page
+      navigateToLogin();
+
+      // Optionally, you can return null or throw a different error
+      return null;
+    } else if (error.name === ERROR_NAMES.SESSION_KEY_MISMATCH) {
+      // Handle session key mismatch
+      // e.g., clear session and redirect to login
+    } else {
+      // Handle other errors
+      throw error;
+    }
+  }
+}
+
+// Example helper functions
+async function clearStoredAuthData() {
+  // Clear local storage or secure storage
+  await AsyncStorage.removeItem('authData');
+  await AsyncStorage.removeItem('delegationChain');
+}
+
+function showToast(message: string) {
+  // Show toast using your preferred toast library
+  Toast.show({
+    type: 'error',
+    text1: 'Authentication Error',
+    text2: message,
+  });
+}
+
+function navigateToLogin() {
+  // Navigate to login screen using your navigation library
+  navigation.navigate('Login');
+}
+```
 
 ### Deep Link Management
 

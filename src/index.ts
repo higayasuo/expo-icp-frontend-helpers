@@ -1,3 +1,4 @@
+export * from './errors/identityErrors';
 export * from './buildDeepLink';
 export * from './buildIdentity';
 export * from './DeepLinkType';
