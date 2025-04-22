@@ -5,6 +5,28 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.3] - 2025-04-22
+
+### Added
+- Identity Management
+  - Added `ERROR_NAMES` constant for type-safe error name references
+  - Improved error handling documentation with practical examples
+
+### Changed
+- Identity Management
+  - Renamed `DelegationChainExpiredError` to `AuthenticationExpiredError` for better clarity
+  - Updated error message for authentication expiration to be more user-friendly
+  - Refactored error classes to use `ERROR_NAMES` constant
+- Documentation
+  - Updated README.md with detailed error handling examples
+  - Added examples for handling `AuthenticationExpiredError`
+
+## [0.1.2] - 2025-04-22
+
+### Changed
+- Dependencies
+  - Modified peer dependency for `@dfinity/identity` to allow any version (`*`)
+
 ## [0.1.1] - 2025-04-22
 
 ### Added
