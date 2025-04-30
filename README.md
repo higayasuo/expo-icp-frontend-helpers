@@ -176,15 +176,32 @@ Builds the appropriate deep link URL based on the provided configuration:
 - For 'legacy': Returns '{expoScheme}://'
 - For 'modern': Returns the frontend canister URL (must be HTTPS)
 
-### Iframe Detection
+### URL Parsing
 
-#### `determineIframe`
+#### `parseURL`
 
 ```typescript
-import { determineIframe } from 'expo-icp-frontend-helpers';
+import { parseURL } from 'expo-icp-frontend-helpers';
 
-// Example usage
-const isIframe = determineIframe();
+// Define your search parameters type
+type SearchParams = {
+  bbb?: string;
+  ccc?: string;
+};
+
+// Use the function
+const { pathname, searchParams } = parseURL<SearchParams>();
+
+// For URL: https://example.com/aaa/?bbb=xxx&ccc=yyy
+// pathname will be '/aaa/'
+// searchParams will be { bbb: 'xxx', ccc: 'yyy' }
 ```
 
-Returns `true` if the code is running inside an iframe, `false` otherwise.
+Parses the current URL and returns an object containing the pathname and search parameters.
+The search parameters are type-safe based on the provided generic type.
+
+Features:
+- Type-safe search parameters using TypeScript generics
+- Returns both pathname and search parameters
+- Throws an error if used in a non-browser environment
+- Handles URLs with or without search parameters
