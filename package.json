@@ -1,6 +1,6 @@
 {
   "name": "expo-icp-frontend-helpers",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "Helper functions for integrating Expo and ICP frontend. Provides deep linking, iframe detection, and other frontend utilities.",
   "type": "module",
   "main": "dist/index.cjs",

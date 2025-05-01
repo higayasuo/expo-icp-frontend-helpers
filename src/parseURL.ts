@@ -1,27 +1,30 @@
-import { normalizePath } from "./normalizePath";
+import { normalizePath } from './normalizePath';
+import { StringRecord } from './types';
+import { paramsToObject } from './paramsToObject';
 
 /**
- * Parses the current URL and returns an object containing the pathname and search parameters.
- * The search parameters are type-safe based on the provided generic type.
- *
- * @template T - The type of search parameters to extract
- * @returns {Object} An object containing pathname and search parameters
- * @returns {string} returns.pathname - The pathname part of the URL
- * @returns {T} returns.searchParams - The search parameters as an object of type T
+ * Parses a URL and returns the pathname and search parameters.
+ * @template SearchParams - The type of search parameters to extract
+ * @template HashParams - The type of hash parameters to extract
+ * @param url - The URL to parse
+ * @returns An object containing the pathname and search parameters.
  */
-export const parseURL = <T extends Record<string, string | undefined>>(): {
+export const parseURL = <SearchParams extends StringRecord = StringRecord, HashParams extends StringRecord = StringRecord>(
+  url: string
+): {
   pathname: string;
-  searchParams: T;
+  searchParams: SearchParams;
+  hashParams: HashParams;
 } => {
-  if (typeof window === 'undefined') {
-    throw new Error('parseURL can only be used in browser environments');
-  }
+  const parsedUrl = new URL(url);
+  const pathname = normalizePath(parsedUrl.pathname);
 
-  const url = new URL(window.location.href);
-  const searchParams = Object.fromEntries(url.searchParams) as T;
+  const searchParams = paramsToObject(parsedUrl.searchParams) as SearchParams;
+  const hashParams = paramsToObject(new URLSearchParams(parsedUrl.hash.slice(1))) as HashParams;
 
   return {
-    pathname: normalizePath(url.pathname),
+    pathname,
     searchParams,
+    hashParams,
   };
 };

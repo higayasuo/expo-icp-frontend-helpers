@@ -241,19 +241,26 @@ type SearchParams = {
   ccc?: string;
 };
 
-// Use the function
-const { pathname, searchParams } = parseURL<SearchParams>();
+// Define your hash parameters type
+type HashParams = {
+  ddd?: string;
+  eee?: string;
+};
 
-// For URL: https://example.com/aaa/?bbb=xxx&ccc=yyy
-// pathname will be '/aaa/'
+// Use the function
+const url = 'https://example.com/aaa/?bbb=xxx&ccc=yyy#ddd=zzz&eee=www';
+const { pathname, searchParams, hashParams } = parseURL<SearchParams, HashParams>(url);
+
+// pathname will be '/aaa'
 // searchParams will be { bbb: 'xxx', ccc: 'yyy' }
+// hashParams will be { ddd: 'zzz', eee: 'www' }
 ```
 
-Parses the current URL and returns an object containing the pathname and search parameters.
-The search parameters are type-safe based on the provided generic type.
+Parses a URL and returns an object containing the pathname, search parameters, and hash parameters.
+The parameters are type-safe based on the provided generic types.
 
 Features:
-- Type-safe search parameters using TypeScript generics
-- Returns both pathname and search parameters
-- Throws an error if used in a non-browser environment
-- Handles URLs with or without search parameters
+- Type-safe search and hash parameters using TypeScript generics
+- Returns pathname, search parameters, and hash parameters
+- Handles URLs with or without search/hash parameters
+- Empty string values in parameters are converted to undefined

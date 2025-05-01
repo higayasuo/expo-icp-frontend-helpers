@@ -5,6 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.7] - 2025-05-02
+
+### Added
+- URL Parsing
+  - Added hash parameter support to `parseURL` function
+  - Added type-safe hash parameter handling with generics
+  - Added comprehensive tests for hash parameter parsing
+  - Updated documentation to include hash parameter examples
+
+### Changed
+- URL Parsing
+  - Updated `parseURL` to use `paramsToObject` for consistent parameter handling
+  - Improved parameter type safety with optional generic parameters
+  - Enhanced documentation with more detailed examples
+  - Made URL parameter required in `parseURL` function for better reusability
+  - Removed browser environment dependency from `parseURL`
+  - Updated tests to use explicit URL parameters
+
 ## [0.1.6] - 2025-05-02
 
 ### Added

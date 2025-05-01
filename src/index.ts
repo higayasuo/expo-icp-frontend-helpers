@@ -6,5 +6,6 @@ export * from './comparePaths';
 export * from './DeepLinkType';
 export * from './getDeepLinkType';
 export * from './normalizePath';
+export * from './paramsToObject';
 export * from './parseURL';
 export * from '@higayasuo/u8a-utils';
