@@ -8,7 +8,7 @@ describe('parseURL', () => {
     // Mock window.location
     global.window = {
       location: {
-        href: 'https://example.com/aaa/?bbb=xxx&ccc=yyy',
+        href: 'https://example.com/aaa/bbb/?bbb=xxx&ccc=yyy',
       },
     } as unknown as Window & typeof globalThis;
   });
@@ -33,7 +33,7 @@ describe('parseURL', () => {
     const result = parseURL<SearchParams>();
 
     expect(result).toEqual({
-      pathname: '/aaa/',
+      pathname: '/aaa/bbb',
       searchParams: {
         bbb: 'xxx',
         ccc: 'yyy',
@@ -41,34 +41,73 @@ describe('parseURL', () => {
     });
   });
 
-  it('should handle URLs without search params', () => {
-    global.window.location.href = 'https://example.com/aaa/';
+  it('should handle URLs with trailing slash in pathname', () => {
+    global.window.location.href = 'https://example.com/aaa/bbb/?';
 
     type SearchParams = Record<string, string | undefined>;
 
     const result = parseURL<SearchParams>();
 
     expect(result).toEqual({
-      pathname: '/aaa/',
+      pathname: '/aaa/bbb',
+      searchParams: {},
+    });
+  });
+
+  it('should handle URLs with multiple consecutive slashes in pathname', () => {
+    global.window.location.href = 'https://example.com/aaa///bbb/?';
+
+    type SearchParams = Record<string, string | undefined>;
+
+    const result = parseURL<SearchParams>();
+
+    expect(result).toEqual({
+      pathname: '/aaa/bbb',
+      searchParams: {},
+    });
+  });
+
+  it('should handle URLs with empty pathname', () => {
+    global.window.location.href = 'https://example.com/?';
+
+    type SearchParams = Record<string, string | undefined>;
+
+    const result = parseURL<SearchParams>();
+
+    expect(result).toEqual({
+      pathname: '/',
+      searchParams: {},
+    });
+  });
+
+  it('should handle URLs without search params', () => {
+    global.window.location.href = 'https://example.com/aaa';
+
+    type SearchParams = Record<string, string | undefined>;
+
+    const result = parseURL<SearchParams>();
+
+    expect(result).toEqual({
+      pathname: '/aaa',
       searchParams: {},
     });
   });
 
   it('should handle URLs with empty search params', () => {
-    global.window.location.href = 'https://example.com/aaa/?';
+    global.window.location.href = 'https://example.com/aaa?';
 
     type SearchParams = Record<string, string | undefined>;
 
     const result = parseURL<SearchParams>();
 
     expect(result).toEqual({
-      pathname: '/aaa/',
+      pathname: '/aaa',
       searchParams: {},
     });
   });
 
   it('should handle URLs with multiple search params', () => {
-    global.window.location.href = 'https://example.com/aaa/?a=1&b=2&c=3';
+    global.window.location.href = 'https://example.com/aaa?a=1&b=2&c=3';
 
     type SearchParams = {
       a?: string;
@@ -79,7 +118,7 @@ describe('parseURL', () => {
     const result = parseURL<SearchParams>();
 
     expect(result).toEqual({
-      pathname: '/aaa/',
+      pathname: '/aaa',
       searchParams: {
         a: '1',
         b: '2',

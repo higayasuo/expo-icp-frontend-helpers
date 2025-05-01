@@ -23,6 +23,58 @@ npm install canister-manager@^0.1.7
 
 ## Features
 
+### Path Manipulation
+
+#### `normalizePath`
+
+```typescript
+import { normalizePath } from 'expo-icp-frontend-helpers';
+
+// Example usage
+const normalizedPath = normalizePath('aaa/bbb/'); // '/aaa/bbb'
+const normalizedPath2 = normalizePath('///aaa///bbb///'); // '/aaa/bbb'
+const normalizedPath3 = normalizePath(''); // '/'
+```
+
+Normalizes a path by:
+- Ensuring it starts with a slash
+- Removing trailing slashes
+- Handling multiple consecutive slashes
+- Handling empty paths (returns '/')
+
+#### `comparePaths`
+
+```typescript
+import { comparePaths } from 'expo-icp-frontend-helpers';
+
+// Example usage
+const isEqual = comparePaths('aaa/bbb/', '/aaa/bbb'); // true
+const isEqual2 = comparePaths('///aaa///bbb', '/aaa/bbb'); // true
+const isEqual3 = comparePaths('aaa/bbb', 'aaa/ccc'); // false
+```
+
+Compares two paths after normalizing them. Returns true if the paths are equal after normalization.
+
+#### `concatPaths`
+
+```typescript
+import { concatPaths } from 'expo-icp-frontend-helpers';
+
+// Example usage
+const path = concatPaths('aaa', 'bbb', 'ccc'); // '/aaa/bbb/ccc'
+const path2 = concatPaths('/aaa', 'bbb/', 'ccc'); // '/aaa/bbb/ccc'
+const path3 = concatPaths('aaa', '', 'bbb'); // '/aaa/bbb'
+const path4 = concatPaths(); // '/'
+```
+
+Concatenates multiple paths into a single normalized path. Handles:
+- Multiple paths
+- Leading and trailing slashes
+- Multiple consecutive slashes
+- Empty paths
+- Root path
+- No paths (returns '/')
+
 ### Identity Management
 
 #### `buildIdentity`

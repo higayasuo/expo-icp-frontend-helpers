@@ -1,3 +1,5 @@
+import { normalizePath } from "./normalizePath";
+
 /**
  * Parses the current URL and returns an object containing the pathname and search parameters.
  * The search parameters are type-safe based on the provided generic type.
@@ -19,7 +21,7 @@ export const parseURL = <T extends Record<string, string | undefined>>(): {
   const searchParams = Object.fromEntries(url.searchParams) as T;
 
   return {
-    pathname: url.pathname,
+    pathname: normalizePath(url.pathname),
     searchParams,
   };
 };
