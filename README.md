@@ -31,14 +31,14 @@ npm install canister-manager@^0.1.7
 import { normalizePath } from 'expo-icp-frontend-helpers';
 
 // Example usage
-const normalizedPath = normalizePath('aaa/bbb/'); // '/aaa/bbb'
-const normalizedPath2 = normalizePath('///aaa///bbb///'); // '/aaa/bbb'
+const normalizedPath = normalizePath('aaa/bbb/'); // '/aaa/bbb/'
+const normalizedPath2 = normalizePath('///aaa///bbb///'); // '/aaa/bbb/'
 const normalizedPath3 = normalizePath(''); // '/'
 ```
 
 Normalizes a path by:
 - Ensuring it starts with a slash
-- Removing trailing slashes
+- Preserving trailing slashes
 - Handling multiple consecutive slashes
 - Handling empty paths (returns '/')
 
@@ -48,12 +48,13 @@ Normalizes a path by:
 import { comparePaths } from 'expo-icp-frontend-helpers';
 
 // Example usage
-const isEqual = comparePaths('aaa/bbb/', '/aaa/bbb'); // true
+const isEqual = comparePaths('aaa/bbb/', '/aaa/bbb'); // false
 const isEqual2 = comparePaths('///aaa///bbb', '/aaa/bbb'); // true
 const isEqual3 = comparePaths('aaa/bbb', 'aaa/ccc'); // false
 ```
 
 Compares two paths after normalizing them. Returns true if the paths are equal after normalization.
+Note that paths with different trailing slashes are considered different paths.
 
 #### `concatPaths`
 

@@ -10,8 +10,8 @@ describe('normalizePath', () => {
     expect(normalizePath('/hoge')).toBe('/hoge');
   });
 
-  it('should remove trailing slash when present', () => {
-    expect(normalizePath('/hoge/')).toBe('/hoge');
+  it('should keep trailing slash when present', () => {
+    expect(normalizePath('/hoge/')).toBe('/hoge/');
   });
 
   it('should handle empty string', () => {
@@ -23,10 +23,10 @@ describe('normalizePath', () => {
   });
 
   it('should handle multiple slashes', () => {
-    expect(normalizePath('//hoge//')).toBe('/hoge');
+    expect(normalizePath('//hoge//')).toBe('/hoge/');
   });
 
   it('should handle nested paths', () => {
-    expect(normalizePath('hoge/fuga/')).toBe('/hoge/fuga');
+    expect(normalizePath('hoge/fuga/')).toBe('/hoge/fuga/');
   });
 });

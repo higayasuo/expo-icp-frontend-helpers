@@ -4,11 +4,12 @@ import { comparePaths } from '../comparePaths';
 describe('comparePaths', () => {
   it('should return true for identical paths', () => {
     expect(comparePaths('/aaa/bbb', '/aaa/bbb')).toBe(true);
+    expect(comparePaths('/aaa/bbb/', '/aaa/bbb/')).toBe(true);
   });
 
-  it('should return true for paths with different trailing slashes', () => {
-    expect(comparePaths('/aaa/bbb/', '/aaa/bbb')).toBe(true);
-    expect(comparePaths('/aaa/bbb', '/aaa/bbb/')).toBe(true);
+  it('should return false for paths with different trailing slashes', () => {
+    expect(comparePaths('/aaa/bbb/', '/aaa/bbb')).toBe(false);
+    expect(comparePaths('/aaa/bbb', '/aaa/bbb/')).toBe(false);
   });
 
   it('should return true for paths with different leading slashes', () => {

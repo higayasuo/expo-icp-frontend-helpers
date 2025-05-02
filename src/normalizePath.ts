@@ -12,12 +12,7 @@ export const normalizePath = (path: string): string => {
   const normalizedPath = path.replace(/\/+/g, '/');
 
   // Add leading slash if missing
-  const pathWithLeadingSlash = normalizedPath.startsWith('/')
+  return normalizedPath.startsWith('/')
     ? normalizedPath
     : `/${normalizedPath}`;
-
-  // Remove trailing slash if present
-  return pathWithLeadingSlash.endsWith('/')
-    ? pathWithLeadingSlash.slice(0, -1)
-    : pathWithLeadingSlash;
 };

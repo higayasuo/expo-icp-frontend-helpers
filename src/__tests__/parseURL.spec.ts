@@ -7,7 +7,7 @@ describe('parseURL', () => {
     const result = parseURL(url);
 
     expect(result).toEqual({
-      pathname: '/aaa/bbb',
+      pathname: '/aaa/bbb/',
       searchParams: {
         bbb: 'xxx',
         ccc: 'yyy',
@@ -40,7 +40,7 @@ describe('parseURL', () => {
     const result = parseURL<SearchParams, HashParams>(url);
 
     expect(result).toEqual({
-      pathname: '/aaa/bbb',
+      pathname: '/aaa/bbb/',
       searchParams: {
         bbb: 'xxx',
         ccc: 'yyy',
@@ -57,7 +57,7 @@ describe('parseURL', () => {
     const result = parseURL(url);
 
     expect(result).toEqual({
-      pathname: '/aaa/bbb',
+      pathname: '/aaa/bbb/',
       searchParams: {
         bbb: 'xxx',
         ccc: 'yyy',
@@ -71,7 +71,7 @@ describe('parseURL', () => {
     const result = parseURL(url);
 
     expect(result).toEqual({
-      pathname: '/aaa/bbb',
+      pathname: '/aaa/bbb/',
       searchParams: {},
       hashParams: {
         ddd: 'zzz',
@@ -85,7 +85,7 @@ describe('parseURL', () => {
     const result = parseURL(url);
 
     expect(result).toEqual({
-      pathname: '/aaa/bbb',
+      pathname: '/aaa/bbb/',
       searchParams: {},
       hashParams: {},
     });
@@ -96,7 +96,7 @@ describe('parseURL', () => {
     const result = parseURL(url);
 
     expect(result).toEqual({
-      pathname: '/aaa/bbb',
+      pathname: '/aaa/bbb/',
       searchParams: {},
       hashParams: {},
     });
@@ -130,6 +130,17 @@ describe('parseURL', () => {
 
     expect(result).toEqual({
       pathname: '/aaa',
+      searchParams: {},
+      hashParams: {},
+    });
+  });
+
+  it('should handle exp:// URLs', () => {
+    const url = 'exp://192.168.0.210/--/';
+    const result = parseURL(url);
+
+    expect(result).toEqual({
+      pathname: '/--/',
       searchParams: {},
       hashParams: {},
     });

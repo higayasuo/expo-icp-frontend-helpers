@@ -28,7 +28,7 @@ export const buildDeepLink = ({
     case 'icp':
       return frontendCanisterURL;
     case 'dev-server':
-      return 'http://localhost:8081/';
+      return 'http://localhost:8081/'
     case 'expo-go':
       return `exp://${localIPAddress}:8081/--/`;
     case 'legacy':

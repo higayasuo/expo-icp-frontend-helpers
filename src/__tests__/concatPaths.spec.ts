@@ -13,7 +13,7 @@ describe('concatPaths', () => {
   });
 
   it('should handle paths with trailing slashes', () => {
-    expect(concatPaths('aaa/', 'bbb/', 'ccc/')).toBe('/aaa/bbb/ccc');
+    expect(concatPaths('aaa/', 'bbb/', 'ccc/')).toBe('/aaa/bbb/ccc/');
   });
 
   it('should handle paths with multiple consecutive slashes', () => {
@@ -21,7 +21,7 @@ describe('concatPaths', () => {
   });
 
   it('should handle empty paths', () => {
-    expect(concatPaths('', 'aaa', '')).toBe('/aaa');
+    expect(concatPaths('', 'aaa', '')).toBe('/aaa/');
     expect(concatPaths('aaa', '', 'bbb')).toBe('/aaa/bbb');
   });
 
@@ -33,7 +33,7 @@ describe('concatPaths', () => {
   it('should handle single path', () => {
     expect(concatPaths('aaa')).toBe('/aaa');
     expect(concatPaths('/aaa')).toBe('/aaa');
-    expect(concatPaths('aaa/')).toBe('/aaa');
+    expect(concatPaths('aaa/')).toBe('/aaa/');
   });
 
   it('should handle no paths', () => {
