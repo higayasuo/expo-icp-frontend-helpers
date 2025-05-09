@@ -1,6 +1,6 @@
 {
   "name": "expo-icp-frontend-helpers",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "Helper functions for integrating Expo and ICP frontend. Provides deep linking, iframe detection, and other frontend utilities.",
   "type": "module",
   "main": "dist/index.cjs",
@@ -54,6 +54,6 @@
     "canister-manager": "^0.1.7"
   },
   "dependencies": {
-    "@higayasuo/u8a-utils": "^1.0.1"
+    "@higayasuo/u8a-utils": "^1.0.2"
   }
 }
