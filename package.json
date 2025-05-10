@@ -51,7 +51,8 @@
   },
   "peerDependencies": {
     "@dfinity/identity": "*",
-    "canister-manager": "^0.1.7"
+    "canister-manager": "^0.1.7",
+    "expo-web-browser": "*"
   },
   "dependencies": {
     "@higayasuo/u8a-utils": "^1.0.3"

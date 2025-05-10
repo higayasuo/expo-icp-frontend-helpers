@@ -3,3 +3,4 @@
  * This is commonly used for URL parameters where values can be undefined.
  */
 export type StringRecord = Record<string, string | undefined>;
+
