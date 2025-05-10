@@ -5,6 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+- URL Parsing
+  - Added `objectToParamsStr` function for converting objects to query strings
+  - Added support for camelCase to kebab-case conversion
+  - Added support for numbers, booleans, and special characters
+  - Added type-safe parameter handling with TypeScript generics
+  - Added `parseParams` function for parsing query strings with type safety
+  - Added support for required parameter validation
+  - Added support for kebab-case to camelCase conversion
+  - Added support for hash parameters
+  - Added support for empty string values (converts to undefined)
+
+### Removed
+- Removed `parseURL` function as it's no longer needed
+- Removed `paramsToObject` function as it's no longer needed
+
 ## [0.1.10] - 2025-05-09
 
 ### Changed
