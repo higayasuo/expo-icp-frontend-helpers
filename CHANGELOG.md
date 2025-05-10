@@ -8,6 +8,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
+- Browser Management
+  - Added `openBrowser` function for opening URLs in the device's browser
+  - Added `dismissBrowser` function for dismissing the browser with smooth transitions
+  - Added comprehensive tests for both browser management functions
+  - Added documentation for browser management in README.md
+
 - URL Parsing
   - Added `objectToParamsStr` function for converting objects to query strings
   - Added support for camelCase to kebab-case conversion
