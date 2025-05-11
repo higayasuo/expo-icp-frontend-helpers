@@ -11,7 +11,7 @@ export default defineConfig({
       formats: ['es', 'cjs'],
     },
     rollupOptions: {
-      external: ['canister-manager', '@dfinity/identity', 'expo-web-browser'],
+      external: ['canister-manager', '@dfinity/identity'],
     },
   },
   plugins: [
