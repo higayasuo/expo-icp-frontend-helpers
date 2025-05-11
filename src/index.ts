@@ -8,7 +8,7 @@ export * from './DeepLinkType';
 export * from './getDeepLinkType';
 export * from './kebabToCamel';
 export * from './normalizePath';
-export * from './objectToParamsStr';
 export * from './parseParams';
 export * from './types';
+export * from './updateParams';
 export * from '@higayasuo/u8a-utils';

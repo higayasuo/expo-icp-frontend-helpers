@@ -1,4 +1,3 @@
-import { StringRecord } from "./types";
 import { kebabToCamel } from "./kebabToCamel";
 import { camelToKebab } from "./camelToKebab";
 
@@ -11,7 +10,7 @@ import { camelToKebab } from "./camelToKebab";
  * @returns An object containing the parsed parameters with camelCase keys
  * @throws {Error} If any required parameter is missing
  */
-export const parseParams = <T extends StringRecord>(paramsStr: string, ...requiredKeys: (keyof T)[]) => {
+export const parseParams = <T extends Record<string, string>>(paramsStr: string, ...requiredKeys: (keyof T)[]) => {
   // Remove hash if present
   const cleanStr = paramsStr.startsWith('#') ? paramsStr.slice(1) : paramsStr;
   const params = new URLSearchParams(cleanStr);

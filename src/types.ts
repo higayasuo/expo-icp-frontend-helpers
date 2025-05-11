@@ -1,6 +1,6 @@
 /**
- * A type representing a record of string keys with optional string values.
- * This is commonly used for URL parameters where values can be undefined.
+ * Represents an object that can be used to store URL parameters.
+ * Each key is a string, and each value can be a string, number, boolean, or undefined.
  */
-export type StringRecord = Record<string, string | undefined>;
+export type URLParamsObject = Record<string, string | number | boolean | undefined>;
 

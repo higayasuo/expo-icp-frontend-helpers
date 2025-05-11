@@ -231,33 +231,43 @@ Builds the appropriate deep link URL based on the provided configuration:
 
 ### URL Parsing
 
-#### `objectToParamsStr`
+#### `updateParams`
 
 ```typescript
-import { objectToParamsStr } from 'expo-icp-frontend-helpers';
+import { updateParams } from 'expo-icp-frontend-helpers';
 
 // Example usage
-const params = objectToParamsStr({ id: '123' }); // 'id=123'
-const params2 = objectToParamsStr({ userId: '123' }); // 'user-id=123'
-const params3 = objectToParamsStr({ userId: '123', userName: 'john' }); // 'user-id=123&user-name=john'
+const params = new URLSearchParams();
+updateParams(params, { userId: '123', userName: 'john' });
+console.log(params.toString()); // 'user-id=123&user-name=john'
 
 // With undefined values
-const params4 = objectToParamsStr({ id: '123', name: undefined }); // 'id=123'
+const params2 = new URLSearchParams();
+updateParams(params2, { id: '123', name: undefined });
+console.log(params2.toString()); // 'id=123'
 
 // With numbers
-const params5 = objectToParamsStr({ userId: 123 }); // 'user-id=123'
+const params3 = new URLSearchParams();
+updateParams(params3, { userId: 123 });
+console.log(params3.toString()); // 'user-id=123'
 
 // With boolean values
-const params6 = objectToParamsStr({ isActive: true }); // 'is-active=true'
+const params4 = new URLSearchParams();
+updateParams(params4, { isActive: true });
+console.log(params4.toString()); // 'is-active=true'
 
 // With special characters
-const params7 = objectToParamsStr({ query: 'hello world' }); // 'query=hello+world'
+const params5 = new URLSearchParams();
+updateParams(params5, { query: 'hello world' });
+console.log(params5.toString()); // 'query=hello+world'
 
 // With multiple words in camelCase
-const params8 = objectToParamsStr({ userProfileId: '123' }); // 'user-profile-id=123'
+const params6 = new URLSearchParams();
+updateParams(params6, { userProfileId: '123' });
+console.log(params6.toString()); // 'user-profile-id=123'
 ```
 
-Converts an object to a query string. Features:
+Updates a URLSearchParams object with values from the given object. Features:
 - Converts camelCase keys to kebab-case
 - Handles undefined values (skips them)
 - Converts numbers and booleans to strings
@@ -267,83 +277,4 @@ Converts an object to a query string. Features:
 
 #### `parseParams`
 
-```typescript
-import { parseParams } from 'expo-icp-frontend-helpers';
-
-// Example usage
-const params = parseParams<{ id: string }>('id=123'); // { id: '123' }
-const params2 = parseParams<{ userId: string }>('user-id=123'); // { userId: '123' }
-const params3 = parseParams<{ userId: string; userName: string }>('user-id=123&user-name=john'); // { userId: '123', userName: 'john' }
-
-// With required parameters
-const params4 = parseParams<{ userId: string }>('user-id=123', 'userId'); // { userId: '123' }
-const params5 = parseParams<{ userId: string; userName: string }>('user-id=123&user-name=john', 'userId', 'userName'); // { userId: '123', userName: 'john' }
-
-// Empty values
-const params6 = parseParams<{ id: string }>('id='); // { id: undefined }
-const params7 = parseParams<{ id: string; name: string }>('id=&name='); // { id: undefined, name: undefined }
-
-// Hash parameters
-const params8 = parseParams<{ id: string }>('#id=123'); // { id: '123' }
 ```
-
-Parses a query string into an object with type safety and mandatory parameter validation. Features:
-- Converts kebab-case parameter keys to camelCase
-- Handles required parameters validation
-- Converts empty string values to undefined
-- Handles hash parameters (removes # prefix)
-- Type-safe parameters using TypeScript generics
-- Supports both kebab-case and camelCase for required parameters
-
-Throws an error if any required parameter is missing:
-```typescript
-// This will throw: "Missing required parameters: userId"
-parseParams<{ userId: string }>('', 'userId');
-
-// This will throw: "Missing required parameters: userId, userName"
-parseParams<{ userId: string; userName: string }>('', 'userId', 'userName');
-```
-
-### Case Conversion
-
-#### `kebabToCamel`
-
-```typescript
-import { kebabToCamel } from 'expo-icp-frontend-helpers';
-
-// Example usage
-const camelCase = kebabToCamel('hello-world'); // 'helloWorld'
-const camelCase2 = kebabToCamel('hello-world-today'); // 'helloWorldToday'
-const camelCase3 = kebabToCamel('hello'); // 'hello'
-const camelCase4 = kebabToCamel('hello--world'); // 'helloWorld'
-const camelCase5 = kebabToCamel('-hello-world-'); // 'helloWorld'
-const camelCase6 = kebabToCamel('hello-WORLD'); // 'helloWORLD'
-```
-
-Converts a kebab-case string to camelCase. Features:
-- Converts single or multiple kebab-case words to camelCase
-- Handles consecutive hyphens
-- Handles hyphens at the beginning or end of the string
-- Preserves uppercase letters after hyphens
-- Returns the original string if no hyphens are present
-
-#### `camelToKebab`
-
-```typescript
-import { camelToKebab } from 'expo-icp-frontend-helpers';
-
-// Example usage
-const kebabCase = camelToKebab('helloWorld'); // 'hello-world'
-const kebabCase2 = camelToKebab('helloWorldToday'); // 'hello-world-today'
-const kebabCase3 = camelToKebab('hello'); // 'hello'
-const kebabCase4 = camelToKebab('hello123World'); // 'hello123-world'
-const kebabCase5 = camelToKebab('helloWORLD'); // 'hello-world'
-const kebabCase6 = camelToKebab('HELLOWORLD'); // 'helloworld'
-```
-
-Converts a camelCase string to kebab-case. Features:
-- Converts single or multiple camelCase words to kebab-case
-- Handles numbers in the string
-- Handles consecutive uppercase letters
-- Converts all characters to lowercase
-- Returns the original string if no uppercase letters are present
