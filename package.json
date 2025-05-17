@@ -1,6 +1,6 @@
 {
   "name": "expo-icp-frontend-helpers",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "description": "Helper functions for integrating Expo and ICP frontend. Provides deep linking, iframe detection, and other frontend utilities.",
   "type": "module",
   "main": "dist/index.cjs",
@@ -22,7 +22,7 @@
     "test": "vitest --run",
     "test:coverage": "vitest run --coverage",
     "typecheck": "tsc --noEmit",
-    "prepare": "npm test && npm run build"
+    "prepublishOnly": "npm test && npm run build"
   },
   "repository": {
     "type": "git",

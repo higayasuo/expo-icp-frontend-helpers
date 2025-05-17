@@ -213,21 +213,59 @@ Determines the deep link type based on:
 import { buildDeepLink } from 'expo-icp-frontend-helpers';
 
 // Example usage
-const deepLink = buildDeepLink({
+const url = buildDeepLink({
   deepLinkType: 'icp',
   localIPAddress: '192.168.1.1',
   dfxNetwork: 'local',
   frontendCanisterId: 'abc123',
   expoScheme: 'myapp',
+  pathname: '/home'
 });
+console.log(url.toString()); // 'https://abc123.ic0.app/home'
+console.log(url.pathname); // '/home'
+
+// With expo-go deep link
+const expoUrl = buildDeepLink({
+  deepLinkType: 'expo-go',
+  localIPAddress: '192.168.1.1',
+  dfxNetwork: 'local',
+  frontendCanisterId: 'abc123',
+  expoScheme: 'myapp',
+  pathname: '/users/profile'
+});
+console.log(expoUrl.toString()); // 'exp://192.168.1.1:8081/--/users/profile'
+console.log(expoUrl.pathname); // '/--/users/profile'
 ```
 
-Builds the appropriate deep link URL based on the provided configuration:
-- For 'icp': Returns the frontend canister URL
-- For 'dev-server': Returns 'http://localhost:8081/'
-- For 'expo-go': Returns 'exp://{localIPAddress}:8081/--/'
-- For 'legacy': Returns '{expoScheme}://'
-- For 'modern': Returns the frontend canister URL (must be HTTPS)
+Builds a deep link URL based on the provided configuration. Features:
+- Returns a URL object for flexible URL manipulation
+- Handles different deep link types (icp, dev-server, expo-go, legacy, modern)
+- Supports custom pathnames
+- Special handling for expo-go deep links (adds /--/ prefix)
+- Type-safe parameters using TypeScript generics
+- Throws clear errors for unsupported types or invalid configurations
+
+#### `buildDeepLinkBaseURL`
+
+```typescript
+import { buildDeepLinkBaseURL } from 'expo-icp-frontend-helpers';
+
+// Example usage
+const baseUrl = buildDeepLinkBaseURL({
+  deepLinkType: 'icp',
+  localIPAddress: '192.168.1.1',
+  frontendCanisterURL: 'https://abc123.ic0.app',
+  expoScheme: 'myapp'
+});
+console.log(baseUrl.toString()); // 'https://abc123.ic0.app'
+```
+
+Builds the base URL for a deep link based on its type. Features:
+- Returns a URL object for flexible URL manipulation
+- Handles different deep link types
+- Special handling for expo-go deep links (includes /--/ in base URL)
+- Type-safe parameters using TypeScript generics
+- Throws clear errors for unsupported types or invalid configurations
 
 ### URL Parsing
 

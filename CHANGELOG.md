@@ -5,6 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.13] - 2025-05-11
+
+### Added
+- Deep Link Management
+  - Added `buildDeepLinkBaseURL` function for building base URLs for deep links
+  - Added support for custom pathnames in deep links
+  - Added special handling for expo-go deep links with /--/ prefix
+  - Added comprehensive tests for all deep link types and pathname scenarios
+  - Added type-safe URL object return type for flexible URL manipulation
+
+### Changed
+- Deep Link Management
+  - Updated `buildDeepLink` to use `buildDeepLinkBaseURL` for better code organization
+  - Improved error messages for unsupported deep link types
+  - Enhanced documentation with detailed examples and features
+  - Updated tests to cover all deep link types and pathname scenarios
+
 ## [0.1.12] - 2025-05-11
 
 ### Added
